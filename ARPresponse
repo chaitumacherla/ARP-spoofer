@@ -2,6 +2,7 @@
 
 import scapy.all as scapy
 import time
+import sys
 
 def get_mac(ip):
 
@@ -23,5 +24,6 @@ while True:
       spoof("<ip address of target","<ip address of router")
       spoof("<ip address of router","<ip address of target")
       sent_packets_count = sent_packets_count +2
-      print("[+]packets sent:" + str(sent_packets_count))
+      print("/r [+]packets sent:" + str(sent_packets_count)),
+      sys.stdout.flush()
       time.sleep(2)
